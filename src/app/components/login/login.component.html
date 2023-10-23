@@ -1,0 +1,23 @@
+<div >
+  <h1>Login to enter the website</h1>
+  <div class="container">
+    <form [formGroup]="form">
+      <div>
+        <mat-form-field class="label">
+          <mat-label  class="labell">Enter your username/email</mat-label>
+          <input matInput placeholder="username/pat@example.com" formControlName="username">
+          <!-- <mat-error *ngIf="username.invalid">{{'Campo invalido'}}</mat-error> -->
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Enter your password</mat-label>
+          <input type="password" matInput placeholder="********" formControlName="password">
+          <!-- <mat-error *ngIf="username.invalid">{{'Campo invalido'}}</mat-error> -->
+        </mat-form-field>
+      </div>
+      <button (click)="onSubmit()" mat-raised-button color="warn">login</button>
+    </form>
+  </div>
+
+</div>

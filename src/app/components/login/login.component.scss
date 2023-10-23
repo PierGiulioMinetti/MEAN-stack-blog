@@ -1,0 +1,19 @@
+:host{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+
+  .container{
+    width: 700px;
+    background-color: #eee;
+  /* border: 1px solid black; */
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+
+  mat-form-field{
+    width: 300px;
+  }
+}
+
+}
