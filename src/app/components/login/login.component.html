@@ -6,7 +6,10 @@
         <mat-form-field class="label">
           <mat-label  class="labell">Enter your username/email</mat-label>
           <input matInput placeholder="username/pat@example.com" formControlName="username">
-          <!-- <mat-error *ngIf="username.invalid">{{'Campo invalido'}}</mat-error> -->
+          <!-- <mat-error *ngIf="usernameControl.hasError">{{'Campo invalido'}}</mat-error> -->
+          <div *ngIf="usernameControl?.errors?.['maxlength']">
+            Name can be max 10 characters long.
+             </div>
         </mat-form-field>
       </div>
       <div>
@@ -16,8 +19,12 @@
           <!-- <mat-error *ngIf="username.invalid">{{'Campo invalido'}}</mat-error> -->
         </mat-form-field>
       </div>
-      <button (click)="onSubmit()" mat-raised-button color="warn">login</button>
+      <button [disabled]="form.invalid" (click)="onSubmit()" mat-raised-button color="warn">login</button>
     </form>
   </div>
 
 </div>
+
+{{form.get('username')?.errors | json }}
+{{form.get('password')?.hasError('requiredLength') | json}}
+{{form.value.password | json}}

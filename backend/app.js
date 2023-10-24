@@ -2,6 +2,9 @@
 const express = require('express');
 const app = express();
 
+//needed to parse correctly the incoming requests
+app.use(express.json());
+
 // handling CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin",
@@ -13,11 +16,15 @@ app.use((req, res, next) => {
 
 
 const birds = require('./routes/birds.routes')
-app.use('/birds', birds)
+app.use('/birds', birds);
 
 const message = require('./routes/message.routes')
-app.use('/message', message)
+app.use('/message', message);
 
+
+
+const login = require('./routes/login.routes')
+app.use('/login', login);
 
 
 
