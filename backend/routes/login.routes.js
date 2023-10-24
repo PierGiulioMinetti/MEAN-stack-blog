@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     res.status(401);
     res.json({
       message:'Credentials not found',
-      isLoggedIn: true
+      isLoggedIn: false
     });
   }
 })

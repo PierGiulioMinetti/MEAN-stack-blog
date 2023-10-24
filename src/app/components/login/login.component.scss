@@ -10,7 +10,11 @@
     border-radius: 7px;
     display: flex;
     justify-content: center;
-}
+
+    .logout-btn{
+      margin-left: 1rem;
+    }
+  }
 
   mat-form-field{
     width: 300px;
@@ -19,6 +23,7 @@
   button:disabled{
     background-color: rgb(158 59 37 / 59%);
   }
+
 }
 
 
