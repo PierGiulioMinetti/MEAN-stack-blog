@@ -11,6 +11,7 @@ import { LoginI } from './login-interface';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent {
   form: FormGroup
   constructor(
     private loginService: LoginService,
-    private sessionStorageService: SessionStorageService
+    private sessionStorageService: SessionStorageService,
+    private router: Router
   ) {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required]),
@@ -58,16 +60,14 @@ export class LoginComponent {
           (res: LoginI) => {
             console.log(res);
             if (res.token) {
-              this.sessionStorageService.setVariable('token', res.token)
+              this.sessionStorageService.setVariable('token', res.token);
+              this.router.navigate(['/homepage']);
+            } else {
+              //create toast service that display with error
             }
           }),
         (error: HttpErrorResponse) => {
-          // Handle the error response
-          // console.error('Error:', error.statusText);
-          // console.error('Error:', error.status);
           throw error;
-
-
         }
     }
   }
