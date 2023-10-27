@@ -12,14 +12,15 @@ import { SessionStorageService } from 'src/app/core/services/session-storage.ser
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastComponent } from "../toast/toast.component";
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, JsonPipe],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, JsonPipe, ToastComponent]
 })
 export class LoginComponent {
 

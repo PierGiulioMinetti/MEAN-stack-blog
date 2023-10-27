@@ -1,0 +1,63 @@
+.toasts-list {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+  // height: 100px;
+  padding: 2rem;
+  width: 500px;
+  padding: 2rem;
+  // color:;
+}
+
+.toast-common{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+  // height: 100px;
+  padding: 2rem;
+  width: 500px;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.info {
+  background-color: rgb(76, 151, 236);
+  color: white;
+  font-size: 21px;
+   position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+}
+
+.warning {
+  background-color: rgb(236, 212, 76);
+  color: white;
+  font-size: 21px;
+   position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+}
+
+.success {
+  background-color: rgb(78, 212, 98);
+  color: white;
+  font-size: 21px;
+   position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+}
+
+.error {
+  background-color: rgb(238, 48, 22);
+  color: white;
+  font-size: 21px;
+   position: absolute;
+  right: 0;
+  top: 0;
+  width: 500px;
+}

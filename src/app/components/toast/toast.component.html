@@ -1,0 +1,9 @@
+<ng-container *ngIf="toasts.length > 0" class="toasts-list">
+  <div *ngFor="let toast of toasts">
+    <p [class]="toast.toastClass" class="toast-common">
+      {{toast.content}}
+    </p>
+
+  </div>
+
+</ng-container>

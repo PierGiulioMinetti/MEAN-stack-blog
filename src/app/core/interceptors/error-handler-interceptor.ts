@@ -4,11 +4,15 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, Htt
 import { Observable, of, throwError } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
 import { Router } from "@angular/router";
+import { ToastService } from "../services/toast.service";
 
 @Injectable()
 export class GlobalHttpInterceptorService implements HttpInterceptor {
 
-  constructor(public router: Router) {
+  constructor(
+    private router: Router,
+    private toastService: ToastService
+    ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -28,6 +32,8 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
               case 401:      //401 Unauthorized
                 // this.router.navigateByUrl("/login");
                 console.log('401 - by interceptor');
+                this.toastService.error('Error 401, unauthorized by interceptor', 'error');
+
 
                 break;
                 case 402:      //payment required

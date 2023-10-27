@@ -1,7 +1,8 @@
+//needed to access environment variables
+require('dotenv').config();
 const express = require('express')
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-
 
 // middleware that is specific to this router
 router.use((req, res, next) => {
@@ -9,9 +10,19 @@ router.use((req, res, next) => {
   next();
 })
 
-// define JWT secret key (must kept secret)
-const secretKey = 'your-secret-key';
+// FUTURE IMPLEMENTATION
+// function authenticateToken(req, res, next) {
+//   // we are getting the 'authorization' header from the request
+//   const authHeader = req.headers['authorization'];
+//   // we are dividing the authorization header from the token
+//   // this is the format we are getting the header --> authorization: BEARER asdòlfk4potjgpo
+//   // ?? if different from null or undefined--> authHeader.split(' ')[1]
+//   const token = authHeader ?? authHeader.split(' ')[1];
 
+//   if(token === null){
+//     return res.sendStatus(401)
+//   }
+// }
 
 // define the home page route
 router.post('/', (req, res) => {
@@ -27,7 +38,9 @@ router.post('/', (req, res) => {
     };
 
     // Generate the JWT token
-    const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign(user, process.env.SECRET_KEY);
+
+    console.log('secret key:---->', process.env.SECRET_KEY);
 
     res.json({
       token,
