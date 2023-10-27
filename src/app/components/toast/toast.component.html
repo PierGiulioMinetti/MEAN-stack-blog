@@ -1,9 +1,8 @@
 <ng-container *ngIf="toasts.length > 0" class="toasts-list">
-  <div *ngFor="let toast of toasts">
+  <div *ngFor="let toast of toasts" class="toast-container">
     <p [class]="toast.toastClass" class="toast-common">
       {{toast.content}}
+      <span class="close" (click)="removeToast(toast)">X</span>
     </p>
-
   </div>
-
 </ng-container>

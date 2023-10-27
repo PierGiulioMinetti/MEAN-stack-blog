@@ -28,28 +28,46 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
 
           } else {
             console.log(`error status : ${error.status} ${error.statusText}`);
-            switch (error.status) {
-              case 401:      //401 Unauthorized
-                // this.router.navigateByUrl("/login");
-                console.log('401 - by interceptor');
-                this.toastService.error('Error 401, unauthorized by interceptor', 'error');
 
+            const errorArray = [
+              {error: 400, message: 'Bad Request by interceptor', class: 'error'},
+              {error: 401, message: 'Unauthorized by interceptor', class: 'error'},
+              {error: 402, message: 'Payment Required, unauthorized by interceptor', class: 'error'},
+              {error: 403, message: 'Forbidden,  by interceptor', class: 'error'},
+              {error: 404, message: 'Custom error by interceptor', class: 'error'},
+            ];
 
-                break;
-                case 402:      //payment required
-                // this.router.navigateByUrl("/login");
-                console.log('402 - by interceptor');
+              if(error.status > 400){
+               for (const singleError of errorArray) {
+                if(error.status === singleError.error ) {
+                  this.toastService.error(singleError.message, singleError.class);
+               }
 
-                break;
-              case 403:     //Forbidden
-                // this.router.navigateByUrl("/unauthorized");
-                console.log('403 - by interceptor');
-                break;
-                case 404:     //Not Found
-                // this.router.navigateByUrl("/unauthorized");
-                console.log('404 - by interceptor');
-                break;
+              }
             }
+
+            // switch (error.status) {
+            //   case 401:      //401 Unauthorized
+            //     // this.router.navigateByUrl("/login");
+            //     console.log('401 - by interceptor');
+            //     this.toastService.error('Error 401, unauthorized by interceptor', 'error');
+
+
+            //     break;
+            //     case 402:      //payment required
+            //     // this.router.navigateByUrl("/login");
+            //     console.log('402 - by interceptor');
+
+            //     break;
+            //   case 403:     //Forbidden
+            //     // this.router.navigateByUrl("/unauthorized");
+            //     console.log('403 - by interceptor');
+            //     break;
+            //     case 404:     //Not Found
+            //     // this.router.navigateByUrl("/unauthorized");
+            //     console.log('404 - by interceptor');
+            //     break;
+            // }
           }
         } else {
           console.error("some thing else happened");

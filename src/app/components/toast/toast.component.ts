@@ -20,7 +20,7 @@ export class ToastComponent {
       });
   }
 
-  protected removeToast(toast: { text: string, toastClass: string, date: Date }): void {
+  protected removeToast(toast: ToastDataI): void {
       this.toasts = this.toasts.filter((item: ToastDataI) => item.date !== toast.date);
   }
 }
