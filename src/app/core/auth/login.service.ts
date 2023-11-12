@@ -15,4 +15,8 @@ export class LoginService {
   login(body: {}):Observable<any>{
     return this.http.post(ROUTES.LOGIN, body);
   }
+
+  logout(body: {}){
+    return this.http.post(ROUTES.LOGOUT, body);
+  }
 }

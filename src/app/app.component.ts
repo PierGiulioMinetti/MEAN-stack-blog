@@ -19,14 +19,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    // this.basicHttpService.loadData(this.messageUrl).subscribe(res=>console.log('res', res)
-    // );
-
-    // this.basicHttpService.loadData(this.birdsUrl).subscribe(res=>console.log('res', res)
-    // );
-
-    // this.basicHttpService.loadData(this.birdsAboutUrl).subscribe(res=>console.log('res', res)
-    // );
   }
 
 

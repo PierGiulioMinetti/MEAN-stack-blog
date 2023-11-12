@@ -1,6 +1,7 @@
 
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 //needed to parse correctly the incoming requests
 app.use(express.json());
@@ -14,6 +15,9 @@ app.use((req, res, next) => {
     next();
 });
 
+// CORS alternative method that allows all request
+// app.use(cors());
+
 
 const birds = require('./routes/birds.routes')
 app.use('/birds', birds);
@@ -21,12 +25,11 @@ app.use('/birds', birds);
 const message = require('./routes/message.routes')
 app.use('/message', message);
 
-
-
 const login = require('./routes/login.routes')
 app.use('/login', login);
 
-
+const logout = require('./routes/logout.routes')
+app.use('/logout', logout);
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000');

@@ -9,27 +9,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginService } from 'src/app/core/auth/login.service';
 import { LoginI } from './login-interface';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
-import { catchError, throwError } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastComponent } from "../toast/toast.component";
 
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    standalone: true,
-    imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, JsonPipe, ToastComponent]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, JsonPipe, ToastComponent]
 })
 export class LoginComponent {
-
+  subs: Subscription;
   form: FormGroup
+
   constructor(
     private loginService: LoginService,
     private sessionStorageService: SessionStorageService,
     private router: Router
   ) {
+    //initialize the subscription to add inside(with add method) all the http call and then bulk unsubscribe in onDestroy
+    this.subs = new Subscription();
+
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(20)])
@@ -56,20 +60,39 @@ export class LoginComponent {
     };
 
     if (credentials) {
-      this.loginService.login(credentials)
-        .subscribe(
-          (res: LoginI) => {
-            console.log(res);
-            if (res.token) {
-              this.sessionStorageService.setVariable('token', res.token);
-              this.router.navigate(['/homepage']);
-            } else {
-              //create toast service that display with error
+      this.subs.add(
+        this.loginService.login(credentials)
+          .subscribe({
+            // (res: LoginI) => {
+            next: (res) => {
+              console.log(res);
+              if (res.token) {
+                this.sessionStorageService.setVariable('token', res.token);
+                this.router.navigate(['/homepage']);
+              } else {
+                //create toast service that display with error
+              }
+            },
+            error: (error: HttpErrorResponse) => {
+              console.log('error inside submit----->',error);
+              throw new Error(error.error);
             }
-          }),
-        (error: HttpErrorResponse) => {
-          throw error;
-        }
+          }
+          ),
+      )
     }
+  }
+
+  logout() {
+    console.log('cliccato');
+
+    this.subs.add(
+      this.loginService.logout({}).subscribe(res => console.log('res logout', res)
+      )
+    )
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }

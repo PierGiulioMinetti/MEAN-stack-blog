@@ -20,7 +20,7 @@
         </mat-form-field>
       </div>
       <button [disabled]="form.invalid" (click)="onSubmit()" mat-raised-button color="warn">login</button>
-      <button class="logout-btn" mat-raised-button color="warn">logout</button>
+      <button (click)="logout()" class="logout-btn" mat-raised-button color="warn">logout</button>
     </form>
   </div>
 
