@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
   console.log('request body', req.body);
 
   // HARDCODED username & password to fake a login
-  if(req.body.username === 'mario' && req.body.password ==='luigiluigiluigi'){
+  if(req.body.username === 'mario' && req.body.password ==='luigi'){
 
     const user = {
       id: 123,

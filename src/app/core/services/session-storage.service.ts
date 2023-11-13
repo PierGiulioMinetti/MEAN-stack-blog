@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+type jwt = string | null;
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionStorageService {
+  jwtToken!: BehaviorSubject<jwt>;
+  constructor() {
+  }
 
-  constructor() { }
+  ngOnInit(){
+    this.jwtToken.next(null)
+  }
 
   setVariable(key:string, object:string){
     if(!sessionStorage.getItem(key)){
@@ -14,6 +22,10 @@ export class SessionStorageService {
   }
 
   getVariable(key:string){
-    sessionStorage.getItem(key)
+   return sessionStorage.getItem(key)
+  }
+
+  clearStorage(){
+    sessionStorage.clear();
   }
 }

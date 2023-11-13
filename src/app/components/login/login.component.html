@@ -4,14 +4,20 @@
     <form [formGroup]="form">
       <div>
         <mat-form-field class="label">
-          <mat-label  class="labell">Enter your username/email</mat-label>
+          <mat-label  class="label">Enter your username/email</mat-label>
           <input matInput placeholder="username/pat@example.com" formControlName="username">
+
           <!-- <mat-error *ngIf="usernameControl.hasError">{{'Campo invalido'}}</mat-error> -->
-          <div *ngIf="usernameControl?.errors?.['maxlength']">
-            Name can be max 10 characters long.
-             </div>
         </mat-form-field>
       </div>
+      <div *ngIf="form?.get('username')?.hasError('minlength')
+      ">
+        Username must be at least 5 characters long.
+         </div>
+         <div *ngIf="form?.get('username')?.hasError('maxlength')
+         ">
+           Username must be maximum 5 characters long.
+            </div>
       <div>
         <mat-form-field>
           <mat-label>Enter your password</mat-label>
@@ -29,6 +35,9 @@
 <app-toast></app-toast>
 
 <!-- DEBUG ERRORS -->
-<!-- {{form.get('username')?.errors | json }}
-{{form.get('password')?.hasError('requiredLength') | json}}
+<!-- <div>
+  Errors username: {{form.get('username')?.errors | json }}
+
+</div> -->
+<!-- {{form.get('password')?.hasError('requiredLength') | json}}
 {{form.value.password | json}} -->

@@ -13,6 +13,7 @@ import { Subscription, catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastComponent } from "../toast/toast.component";
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
@@ -20,7 +21,19 @@ import { ToastComponent } from "../toast/toast.component";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, NgIf, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, JsonPipe, ToastComponent]
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    JsonPipe,
+    NgIf,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    ToastComponent,
+    HeaderComponent,
+  ]
 })
 export class LoginComponent {
   subs: Subscription;
@@ -35,8 +48,8 @@ export class LoginComponent {
     this.subs = new Subscription();
 
     this.form = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(20)])
+      username: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)])
     })
   }
 
@@ -68,6 +81,8 @@ export class LoginComponent {
               console.log(res);
               if (res.token) {
                 this.sessionStorageService.setVariable('token', res.token);
+                this.sessionStorageService.jwtToken = res.token;
+                this.loginService.isAuthenticated$.next(true);
                 this.router.navigate(['/homepage']);
               } else {
                 //create toast service that display with error
@@ -84,10 +99,13 @@ export class LoginComponent {
   }
 
   logout() {
-    console.log('cliccato');
-
     this.subs.add(
-      this.loginService.logout({}).subscribe(res => console.log('res logout', res)
+      this.loginService.logout({}).subscribe((res) => {
+        console.log('res logout', res);
+        this.sessionStorageService.clearStorage();
+        this.loginService.isAuthenticated$.next(false);
+        this.router.navigateByUrl('');
+    }
       )
     )
   }

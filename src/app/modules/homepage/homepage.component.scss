@@ -1,0 +1,26 @@
+:host{
+  // margin-top: 2rem;
+  // display: flex;
+  // justify-content: center;
+
+  .container{
+    margin: 0 auto;
+    width: 700px;
+    background-color: #aea5a557;
+    padding: 3rem 1rem;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+
+    .logout-btn{
+      margin-left: 1rem;
+    }
+  }
+
+  button:disabled{
+    background-color: rgb(158 59 37 / 59%);
+  }
+
+}
+
+

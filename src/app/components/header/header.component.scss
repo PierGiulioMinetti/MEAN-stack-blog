@@ -1,0 +1,17 @@
+ul{
+  display: flex;
+  list-style-type: none;
+  justify-content: right;
+  margin-right: 2rem;
+  margin-top: 1rem;
+
+  &>li {
+    padding: 1rem;
+    font-size: 1.5rem;
+
+    &:hover{
+      cursor: pointer;
+      color: red;
+    }
+  }
+}
