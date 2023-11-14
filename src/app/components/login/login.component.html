@@ -3,27 +3,16 @@
   <div class="container">
     <form [formGroup]="form">
       <div>
-        <mat-form-field class="label">
-          <mat-label  class="label">Enter your username/email</mat-label>
-          <input matInput placeholder="username/pat@example.com" formControlName="username">
-
-          <!-- <mat-error *ngIf="usernameControl.hasError">{{'Campo invalido'}}</mat-error> -->
-        </mat-form-field>
+        <app-simple-input [inputType]="'text'" [inputLabel]="'username'" [inputPlaceholder]="'insert here name or email'" [formControlReference]="form.get('username')" ></app-simple-input>
       </div>
-      <div *ngIf="form?.get('username')?.hasError('minlength')
-      ">
-        Username must be at least 5 characters long.
-         </div>
-         <div *ngIf="form?.get('username')?.hasError('maxlength')
-         ">
-           Username must be maximum 5 characters long.
-            </div>
       <div>
-        <mat-form-field>
-          <mat-label>Enter your password</mat-label>
-          <input type="password" matInput placeholder="********" formControlName="password">
-          <!-- <mat-error *ngIf="username.invalid">{{'Campo invalido'}}</mat-error> -->
-        </mat-form-field>
+        <app-simple-input [inputType]="'email'" [inputLabel]="'email'" [inputPlaceholder]="'insert here email'" [formControlReference]="form.get('email')" ></app-simple-input>
+      </div>
+      <div>
+        <app-simple-input [inputType]="'password'" [inputLabel]="'password'" [inputPlaceholder]="'insert here password'" [formControlReference]="form.get('password')" ></app-simple-input>
+      </div>
+      <div>
+        <app-simple-input [inputType]="'cf'" [inputLabel]="'cf'" [inputPlaceholder]="'insert here cf'" [formControlReference]="form.get('cf')" ></app-simple-input>
       </div>
       <button [disabled]="form.invalid" (click)="onSubmit()" mat-raised-button color="warn">login</button>
       <button (click)="logout()" class="logout-btn" mat-raised-button color="warn">logout</button>

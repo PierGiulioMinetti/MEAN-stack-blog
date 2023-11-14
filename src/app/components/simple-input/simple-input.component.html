@@ -1,0 +1,27 @@
+<mat-form-field class="label">
+  <mat-label class="label">{{inputLabel}}</mat-label>
+  <input [type]="inputType" matInput [placeholder]="inputPlaceholder" [formControl]="formControlReference">
+
+</mat-form-field>
+<div *ngIf="formControlRef.dirty || formControlRef.touched" class="error">
+  <div *ngIf="formControlRef?.hasError('required')
+  ">
+    Field is required!
+  </div>
+  <div *ngIf="formControlRef?.hasError('minlength')
+  ">
+    Username must be at least 5 characters long.
+  </div>
+  <div *ngIf="formControlRef?.hasError('maxlength')
+">
+    Username must be maximum 5 characters long.
+  </div>
+  <div *ngIf="formControlRef?.hasError('email')
+">
+    Username must be provide a valid email address.
+  </div>
+  <div *ngIf="formControlRef?.hasError('pattern')
+">
+    Pattern doesn't match!
+  </div>
+</div>

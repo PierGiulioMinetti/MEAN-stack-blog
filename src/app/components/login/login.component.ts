@@ -14,6 +14,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastComponent } from "../toast/toast.component";
 import { HeaderComponent } from '../header/header.component';
+import { SimpleInputComponent } from '../simple-input/simple-input.component';
+import { ValidatorsPatternEnum } from 'src/app/core/enum/pattern-validators.enum';
 
 
 @Component({
@@ -33,6 +35,7 @@ import { HeaderComponent } from '../header/header.component';
     MatIconModule,
     ToastComponent,
     HeaderComponent,
+    SimpleInputComponent,
   ]
 })
 export class LoginComponent {
@@ -49,6 +52,8 @@ export class LoginComponent {
 
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.email]),
+      cf: new FormControl('', [Validators.pattern(ValidatorsPatternEnum.CF), Validators.minLength(8), Validators.maxLength(20)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)])
     })
   }
