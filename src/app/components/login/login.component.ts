@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginService } from 'src/app/core/auth/login.service';
-import { LoginI } from './login-interface';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { Subscription, catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +14,7 @@ import { Router } from '@angular/router';
 import { ToastComponent } from "../toast/toast.component";
 import { HeaderComponent } from '../header/header.component';
 import { SimpleInputComponent } from '../simple-input/simple-input.component';
-import { ValidatorsPatternEnum } from 'src/app/core/enum/pattern-validators.enum';
+import { ValidatorsPatternEnum } from 'src/app/core/enums/pattern-validators.enum';
 
 
 @Component({
@@ -52,8 +51,6 @@ export class LoginComponent {
 
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)]),
-      email: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.email]),
-      cf: new FormControl('', [Validators.pattern(ValidatorsPatternEnum.CF), Validators.minLength(8), Validators.maxLength(20)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)])
     })
   }
@@ -68,7 +65,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('form valid:', this.form.valid);
+    console.log('form submitted:---->', this.form.getRawValue());
     //SEND HTTP call to backend and check that the credentials are correct
     //user: mario
     // password: luigi

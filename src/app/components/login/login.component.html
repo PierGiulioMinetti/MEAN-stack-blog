@@ -6,16 +6,9 @@
         <app-simple-input [inputType]="'text'" [inputLabel]="'username'" [inputPlaceholder]="'insert here name or email'" [formControlReference]="form.get('username')" ></app-simple-input>
       </div>
       <div>
-        <app-simple-input [inputType]="'email'" [inputLabel]="'email'" [inputPlaceholder]="'insert here email'" [formControlReference]="form.get('email')" ></app-simple-input>
-      </div>
-      <div>
         <app-simple-input [inputType]="'password'" [inputLabel]="'password'" [inputPlaceholder]="'insert here password'" [formControlReference]="form.get('password')" ></app-simple-input>
       </div>
-      <div>
-        <app-simple-input [inputType]="'cf'" [inputLabel]="'cf'" [inputPlaceholder]="'insert here cf'" [formControlReference]="form.get('cf')" ></app-simple-input>
-      </div>
       <button [disabled]="form.invalid" (click)="onSubmit()" mat-raised-button color="warn">login</button>
-      <button (click)="logout()" class="logout-btn" mat-raised-button color="warn">logout</button>
     </form>
   </div>
 

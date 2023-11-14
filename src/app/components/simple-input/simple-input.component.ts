@@ -30,10 +30,4 @@ export class SimpleInputComponent {
     return this.formControlReference as FormControl;
   }
 
-  log(event:Event){
-    const value = (event.target as HTMLInputElement).value;
-    console.log(value);
-
-  }
-
 }

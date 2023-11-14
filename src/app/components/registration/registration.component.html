@@ -1,0 +1,43 @@
+<div>
+  <h1 class="">Registration</h1>
+  <div class="container">
+    <form [formGroup]="form">
+      <div>
+        <app-simple-input [inputType]="'text'" [inputLabel]="'username'"
+          [inputPlaceholder]="'insert here name or email'"
+          [formControlReference]="form.get('username')"></app-simple-input>
+      </div>
+      <div>
+        <app-simple-input [inputType]="'email'" [inputLabel]="'email'" [inputPlaceholder]="'insert here email'"
+          [formControlReference]="form.get('email')"></app-simple-input>
+      </div>
+      <div>
+        <app-simple-input [inputType]="'password'" [inputLabel]="'password'" [inputPlaceholder]="'insert here password'"
+          [formControlReference]="form.get('password')"></app-simple-input>
+      </div>
+      <div>
+        <app-simple-input [inputType]="'password'" [inputLabel]="'password confirmation'"
+          [inputPlaceholder]="'confirm password here'"
+          [formControlReference]="form.get('passwordConfirm')"></app-simple-input>
+      </div>
+      <div *ngIf="form.get('passwordConfirm')?.dirty && form?.hasError('passwordDontMatch')" class="error">
+        Password don't match!
+      </div>
+      <div>
+        <app-simple-input [inputType]="'text'" [inputLabel]="'codice fiscale'" [inputPlaceholder]="'insert here cf'"
+          [formControlReference]="form.get('cf')"></app-simple-input>
+      </div>
+      <button [disabled]="form.invalid" (click)="onSubmit()" mat-raised-button color="warn">login</button>
+      <span class="already-account">
+        <a [routerLink]="['/login']" (click)="logout()" class="logout-btn">I already have an account</a>
+      </span>
+    </form>
+  </div>
+
+</div>
+
+<!-- DEBUG FORMS ERRORS -->
+<!-- <div>
+  errori form:
+  {{form.errors | json}}
+</div> -->

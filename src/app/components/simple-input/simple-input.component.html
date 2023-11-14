@@ -10,15 +10,15 @@
   </div>
   <div *ngIf="formControlRef?.hasError('minlength')
   ">
-    Username must be at least 5 characters long.
+  Field must be a minimum of {{formControlRef?.errors?.['minlength']?.['requiredLength']}} characters
   </div>
   <div *ngIf="formControlRef?.hasError('maxlength')
 ">
-    Username must be maximum 5 characters long.
+    Field must be at max {{formControlRef?.errors?.['maxlength']?.['requiredLength']}} characters
   </div>
   <div *ngIf="formControlRef?.hasError('email')
 ">
-    Username must be provide a valid email address.
+    Field must be provide a valid email address.
   </div>
   <div *ngIf="formControlRef?.hasError('pattern')
 ">
