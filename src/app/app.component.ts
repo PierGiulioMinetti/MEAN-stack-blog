@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BasicHttpService } from './core/services/basic-http.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
   messageUrl = 'http://localhost:3000/message';
   birdsUrl = 'http://localhost:3000/birds';
   birdsAboutUrl = 'http://localhost:3000/birds/about';
+  environment = environment.env;
 
   constructor(private basicHttpService: BasicHttpService){
 

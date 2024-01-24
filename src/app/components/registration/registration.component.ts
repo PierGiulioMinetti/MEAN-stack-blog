@@ -17,6 +17,7 @@ import { ToastComponent } from '../toast/toast.component';
 import { HeaderComponent } from '../header/header.component';
 import { SimpleInputComponent } from '../simple-input/simple-input.component';
 import { matchPasswordValidator } from 'src/app/core/custom-validators/match-password.validators';
+import { environment } from 'src/environments/environment.development';
 
 
 @Component({
@@ -43,7 +44,7 @@ import { matchPasswordValidator } from 'src/app/core/custom-validators/match-pas
 })
 export class RegistrationComponent {
   subs: Subscription;
-  form: FormGroup
+  form!: FormGroup
 
   constructor(
     private loginService: LoginService,
@@ -52,16 +53,23 @@ export class RegistrationComponent {
   ) {
     //initialize the subscription to add inside(with add method) all the http call and then bulk unsubscribe in onDestroy
     this.subs = new Subscription();
+    this.initializeForm();
+  }
 
+  ngOnInit(){
+    console.log('api url',environment.baseUrl);
+
+  }
+
+  initializeForm(){
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(5)]),
       email: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.email]),
       cf: new FormControl('', [Validators.required, Validators.pattern(ValidatorsPatternEnum.CF), Validators.minLength(16), Validators.maxLength(16)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
-    }, { validators: matchPasswordValidator })
+    }, { validators: matchPasswordValidator });
   }
-
 
   get usernameControl(): AbstractControl<any, any> | null {
     return this.form.get('username');

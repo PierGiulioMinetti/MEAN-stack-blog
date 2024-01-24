@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ROUTES } from '../enums/route.enum';
 import { SessionStorageService } from '../services/session-storage.service';
+import { environment } from 'src/environments/environment.development';
 
 
 @Injectable({
@@ -22,13 +23,13 @@ export class LoginService {
   }
 
   login(body: {}):Observable<any>{
-    return this.http.post(ROUTES.LOGIN, body);
+    return this.http.post(environment.baseUrl + ROUTES.LOGIN, body);
   }
 
   logout(body: {}){
       sessionStorage.clear();
       this.isAuthenticated$.next(false);
-      return this.http.post(ROUTES.LOGOUT, body);
+      return this.http.post(environment.baseUrl + ROUTES.LOGOUT, body);
   }
 
 }

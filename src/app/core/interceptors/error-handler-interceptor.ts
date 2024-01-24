@@ -19,8 +19,7 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
 
     return next.handle(req).pipe(
       catchError((error) => {
-        console.log('error is intercept')
-        console.error('error first line by INTERCEPTOR', error);
+        console.error('error by INTERCEPTOR', error);
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
             console.error("Error Event");
@@ -34,13 +33,17 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
               {error: 401, message: 'Unauthorized by interceptor', class: 'error'},
               {error: 402, message: 'Payment Required, unauthorized by interceptor', class: 'error'},
               {error: 403, message: 'Forbidden,  by interceptor', class: 'error'},
-              {error: 404, message: 'Custom error by interceptor', class: 'error'},
+              {error: 404, message: 'Not found, by interceptor', class: 'error'},
             ];
 
-              if(error.status > 400){
+              if(error.status){
+                debugger
                for (const singleError of errorArray) {
                 if(error.status === singleError.error ) {
                   this.toastService.error(singleError.message, singleError.class);
+                } else {
+                 this.toastService.error('Generic error!', 'error');
+
                }
 
               }

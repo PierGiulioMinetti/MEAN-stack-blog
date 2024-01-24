@@ -2,8 +2,15 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+//needed to gain access to .env file in angular folder (created with ng cli)
+require('dotenv').config();
 
-//needed to parse correctly the incoming requests
+/**
+ * app.use(express.json()); --> req.body.nameKeyFromRequest -->
+ allow express to parse file coming from requests into json
+*/
+
+app.use(cors());
 app.use(express.json());
 
 // handling CORS
@@ -14,6 +21,7 @@ app.use((req, res, next) => {
                "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
 
 // CORS alternative method that allows all request
 // app.use(cors());
